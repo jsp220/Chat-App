@@ -4,19 +4,27 @@ const { User, Channel, UserChannel } = require('../../models');
 router.post('/', async (req, res) => {
     try {
         // const channelName = `user${req.session.user_id} & user${req.body.userId}`       
-        const channelName = "user1 & user3"
+        const channelName = `${req.session.username} & ${req.body.username}`
 
         const newChannel = await Channel.create({name: channelName});
 
         const channel = newChannel.get({ plain: true });
 
+        const userData = await User.findAll({
+            where: {
+                username: req.body.username
+            }
+        });
+
+        const user = userData.get({ plain: true });
+        
         const newUserChannel1 = await UserChannel.create({
-            userId: 1,
+            userId: req.session.user_id,
             channelId: channel.id
         })
 
         const newUserChannel2 = await UserChannel.create({
-            userId: 3,
+            userId: user.id,
             channelId: channel.id
         })
 

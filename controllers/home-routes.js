@@ -8,9 +8,24 @@ const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req,res) => {
     try {
-        const channelData = await Channel.findAll();
-        const channel = channelData.map((post) => post.get({ plain: true }));
-        // console.log(channel);
+        const userChannelData = await UserChannel.findAll({
+            where: {
+                userId: req.session.user_id
+            }
+        })
+
+        const userChannels = userChannelData.map((data) => data.get({ plain: true }));
+
+        // console.log(userChannels)
+
+        let channel = [];
+
+        for (let i=0; i < userChannels.length; i++) {
+            const channelData = await Channel.findByPk(userChannels[i].channelId);
+            channel.push(channelData.get({ plain: true }));
+            // console.log(channel)
+        }
+
         res.render('home', {channel, logged_in: req.session.logged_in})
     } catch (err) {
         res.status(500).json(err);
@@ -19,7 +34,25 @@ router.get('/', withAuth, async (req,res) => {
 
 router.get('/channel/:id', withAuth, async (req, res) => {
     try {
-        const channelData = await Channel.findByPk(req.params.id, {
+        const userChannelData = await UserChannel.findAll({
+            where: {
+                userId: req.session.user_id
+            }
+        })
+
+        const userChannels = userChannelData.map((data) => data.get({ plain: true }));
+
+        // console.log(userChannels)
+
+        let channel = [];
+
+        for (let i=0; i < userChannels.length; i++) {
+            const channelData = await Channel.findByPk(userChannels[i].channelId);
+            channel.push(channelData.get({ plain: true }));
+            // console.log(channel)
+        }
+        
+        const singleChannelData = await Channel.findByPk(req.params.id, {
             include: [
                 {model: User, through: UserChannel, as: 'channel_user', attributes: {exclude: ['password']} },
                 // {model: User, through: UserChannel, as: 'channel_user'}, 
@@ -30,12 +63,9 @@ router.get('/channel/:id', withAuth, async (req, res) => {
             ]
         });
 
-        const channel = channelData.get({ plain: true });
+        const singleChannel = singleChannelData.get({ plain: true });
 
-        // console.log(channel);
-
-        // res.render('single-post', { post, logged_in: req.session.logged_in });
-        res.json(channel);
+        res.render('single-channel', { channel, singleChannel, logged_in: req.session.logged_in });
     } catch (err) {
         res.status(500).json(err);
     }
