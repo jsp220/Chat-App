@@ -11,12 +11,12 @@
     },
     {
         "body": "This is a test comment #3 on test blog post #2.",
-        "userId": 1,
+        "userId": 2,
         "channelId": 2
     },
     {
         "body": "This is a test comment #4 on test blog post #1.",
-        "userId": 2,
+        "userId": 3,
         "channelId": 2
     }
 ]
