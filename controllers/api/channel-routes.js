@@ -3,21 +3,20 @@ const { User, Channel, UserChannel } = require('../../models');
 
 router.post('/', async (req, res) => {
     try {
-        // const channelName = `user${req.session.user_id} & user${req.body.userId}`       
         const channelName = `${req.session.username} & ${req.body.username}`
 
         const newChannel = await Channel.create({name: channelName});
 
         const channel = newChannel.get({ plain: true });
-
+        
         const userData = await User.findAll({
             where: {
                 username: req.body.username
             }
         });
 
-        const user = userData.get({ plain: true });
-        
+        const user = userData.map((data) => data.get({ plain: true }));
+
         const newUserChannel1 = await UserChannel.create({
             userId: req.session.user_id,
             channelId: channel.id
@@ -28,7 +27,10 @@ router.post('/', async (req, res) => {
             channelId: channel.id
         })
 
-        res.status(200).json({newChannel, newUserChannel1, newUserChannel2});
+        console.log(channel);
+
+        // res.status(200).redirect(`/channel/${channel.id}`);
+        res.status(200).json(channel);
     } catch (err) {
         res.status(400).json(err);
     }
