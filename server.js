@@ -35,18 +35,34 @@ app.use(session(sess));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+hbs.handlebars.registerHelper("ifEquals", function (arg1, arg2, options) {
+    return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+  });
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
+// Connect Sockect for message chat.
+// io.on('connection', (socket) => {
+//     // Every time localhost:PORT connection is made
+//     // show message on console.
+//     console.log(":electric_plug: User connected!");
+//     socket.on('chat message', msg => { io.emit('chat message', msg); });
+// });
+
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () =>
-        console.log(
-            `\nServer running on ${PORT}!`
-            )
-    );
+    // app.listen(PORT, () =>
+    //     console.log(
+    //         `\nServer running on ${PORT}!`
+    //         )
+    // );
+    // Listen via socket IO connection for messages.
+    http.listen(PORT, () => {
+        console.log(`Socket.IO server running at http://localhost:${PORT}/`);
+    });
 })
 
 // io.on('connection', (socket) => {

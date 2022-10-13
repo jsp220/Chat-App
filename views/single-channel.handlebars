@@ -1,8 +1,19 @@
+<p>asdfasdfasd a{{userid}} b{{singleChannel.Messages.[0].User.id}}</p>
 {{#each singleChannel.Messages}}
-<div class="card text-bg-primary mb-3" style="max-width: 18rem;">
-  <div class="card-header">{{User.username}}</div>
-  <div class="card-body">
-    <h5 class="card-title">{{body}}</h5>
-  </div>
-</div>
+  {{#ifEquals User.id ../userid }}
+<p>a{{../userid}} b{{User.id}}</p>
+        <div class="card text-bg-primary mb-3 right" style="max-width: 18rem;">
+            <div class="card-header">{{User.username}}</div>
+            <div class="card-body">
+                <h5 class="card-title">{{body}}</h5>
+            </div>
+        </div>
+    {{else}}
+        <div class="card text-bg-success mb-3 left" style="max-width: 18rem;">
+            <div class="card-header">{{User.username}}</div>
+            <div class="card-body">
+                <h5 class="card-title">{{body}}</h5>
+            </div>
+        </div>
+    {{/ifEquals}}
 {{/each}}

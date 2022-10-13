@@ -14,6 +14,8 @@ router.get('/', withAuth, async (req,res) => {
             }
         })
 
+        const userid = req.session.user_id;
+
         const userChannels = userChannelData.map((data) => data.get({ plain: true }));
 
         const userData = await User.findAll();
@@ -30,7 +32,7 @@ router.get('/', withAuth, async (req,res) => {
             // console.log(channel)
         }
 
-        res.render('home', {channel, users, logged_in: req.session.logged_in})
+        res.render('home', {channel, users, userid, logged_in: req.session.logged_in})
     } catch (err) {
         res.status(500).json(err);
     }
