@@ -5,32 +5,61 @@ router.post('/', async (req, res) => {
     try {
         const channelName = `${req.session.username} & ${req.body.username}`
 
-        const newChannel = await Channel.create({name: channelName});
+        // if (req.session.username == req.body.username) {
 
-        const channel = newChannel.get({ plain: true });
+        // }
         
-        const userData = await User.findAll({
+        const currentUserData = await User.findOne({
             where: {
-                username: req.body.username
-            }
+                username: req.session.username
+            },
+            include: [
+                {model: Channel, through: UserChannel, as: 'user_channel',},              
+            ]
         });
 
-        const user = userData.map((data) => data.get({ plain: true }));
+        const currentUser = currentUserData.get({ plain: true });
 
-        const newUserChannel1 = await UserChannel.create({
-            userId: req.session.user_id,
-            channelId: channel.id
-        })
+        console.log(currentUser.user_channel);
 
-        const newUserChannel2 = await UserChannel.create({
-            userId: user.id,
-            channelId: channel.id
-        })
+        for (let i in currentUser.user_channel) {
+            console.log(currentUser.user_channel[i].name.search(req.body.username))
+            if (currentUser.user_channel[i].name.search(req.body.username) > 0) {
+                console.log('Channel exists, redirecting')
+                res.status(200).redirect(`/channel/${currentUser.user_channel[i].id}`);
+                break;
+            }
+        }
+        // const user2Data = await User.findOne({
+        //     where: {
+        //         username: req.body.username
+        //     }
+        // });
 
-        console.log(channel);
+        // const user2 = user2Data.get({ plain: true });
 
-        // res.status(200).redirect(`/channel/${channel.id}`);
-        res.status(200).json(channel);
+        
+
+        // const newChannel = await Channel.create({name: channelName});
+
+        // const channel = newChannel.get({ plain: true });
+
+        // const newUserChannel1 = await UserChannel.create({
+        //     userId: req.session.user_id,
+        //     channelId: channel.id
+        // })
+
+        // const newUserChannel2 = await UserChannel.create({
+        //     userId: user.id,
+        //     channelId: channel.id
+        // })
+
+        // console.log(channel);
+
+        // // res.status(200).redirect(`/channel/${channel.id}`);
+        // res.status(200).json(channel);
+
+        
     } catch (err) {
         res.status(400).json(err);
     }

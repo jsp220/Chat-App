@@ -1,14 +1,17 @@
 var socket = io();
 var form = document.getElementById('form');
 var input = document.getElementById('input');
+var rightCol = document.querySelector('.right-col');
+var mainBody = document.querySelector('.mainBody');
 var channelWindow = document.getElementById('channel-window')
 const URL = document.URL;
+
+rightCol.scrollTo(0, rightCol.scrollHeight);
 
 form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
     if (input.value) {
-        socket.emit('chat message', input.value);
         const response = await fetch('/api/message', {
             method: 'POST',
             body: JSON.stringify({
@@ -21,6 +24,9 @@ form.addEventListener('submit', async function (e) {
             const data = await response.json();
 
             console.log(data);
+            localStorage.setItem('sender', data.user.username);
+
+            socket.emit('chat message', input.value, {sender: data.user.username});
             // document.location.replace(`/channel/${data.id}`);
             // const splitUrl = response.url.split("/") // [http:, ]
             // const url = splitUrl[splitUrl.length-1];
@@ -34,13 +40,19 @@ form.addEventListener('submit', async function (e) {
     }
 });
 
-socket.on('chat message', function (msg) {
+socket.on('chat message', async function (msg, username) {
+    
+    const sender = username.sender;
     var div1 = document.createElement('div');
-    div1.classList.add('card', 'text-bg-primary', 'mb-3', 'right');
+    if (username.sender == localStorage.getItem('username')) {
+        div1.classList.add('card', 'text-bg-primary', 'mb-3', 'right');
+    } else {
+        div1.classList.add('card', 'text-bg-success', 'mb-3', 'left');
+    }
     div1.setAttribute('style', 'max-width: 18rem');
     var div2 = document.createElement('div');
     div2.classList.add('card-header');
-    div2.textContent = 'username';
+    div2.textContent = sender;
     var div3 = document.createElement('div');
     div3.classList.add('card-body');
     var item = document.createElement('h5');
@@ -59,5 +71,5 @@ socket.on('chat message', function (msg) {
     // channelWindow.appendChild(item);
     // // end brian's
 
-    window.scrollTo(0, document.body.scrollHeight);
+    rightCol.scrollTo(0, rightCol.scrollHeight);
 });

@@ -13,6 +13,7 @@ const loginFormHandler = async function(event) {
     headers: { "Content-Type": "application/json" }
   })
     .then(function() {
+      localStorage.setItem('username', usernameEl.value);
       document.location.replace("/");
     })
     .catch(err => console.log(err));

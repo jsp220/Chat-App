@@ -1,9 +1,29 @@
-html, body{
-    height: 90%;
+html, 
+body {
+    height: 93%;
 }
-.mainBody{
+
+.left-col,
+.right-col {
+    float: left !important;
+    max-height: 100%;
+    overflow: scroll;
+    margin-bottom: 100px;
+}
+
+.left-col {
+    width: 25%;
+}
+
+.right-col {
+    width: 75%;
+}
+
+.mainBody {
     height: 100%;
+    /* overflow: scroll; */
 }
+
 .bodyDiv{
     height:100%
 }
@@ -26,6 +46,7 @@ html, body{
     height: 3rem; 
     box-sizing: border-box; 
     backdrop-filter: blur(10px); 
+    z-index: 2;
 }
 
 #input { 
@@ -38,6 +59,8 @@ html, body{
 
 #input:focus { outline: none; }
 #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
-/* #messages { list-style-type: none; margin: 0; padding: 0; }
-#messages > li { padding: 0.5rem 1rem; }
-#messages > li:nth-child(odd) { background: #EFEFEF; } */
+
+.text-bg-success,
+.text-bg-primary {
+    z-index: 1;
+}
