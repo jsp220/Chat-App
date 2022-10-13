@@ -1,7 +1,5 @@
-<p>asdfasdfasd a{{userid}} b{{singleChannel.Messages.[0].User.id}}</p>
 {{#each singleChannel.Messages}}
   {{#ifEquals User.id ../userid }}
-<p>a{{../userid}} b{{User.id}}</p>
         <div class="card text-bg-primary mb-3 right" style="max-width: 18rem;">
             <div class="card-header">{{User.username}}</div>
             <div class="card-body">
@@ -17,3 +15,6 @@
         </div>
     {{/ifEquals}}
 {{/each}}
+<form id="form" action="">
+    <input id="input" autocomplete="off" /><button type="submit">Send</button>
+</form>
