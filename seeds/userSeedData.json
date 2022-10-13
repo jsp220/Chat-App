@@ -1,14 +1,22 @@
 [
     {
-        "username": "johndoe",
-        "password": "abcdefgh"
+        "username": "joon",
+        "password": "password"
     },
     {
-        "username": "janesmith",
-        "password": "password123"
+        "username": "ryan",
+        "password": "password"
     },
     {
-        "username": "abcde",
-        "password": "password123"
+        "username": "brian",
+        "password": "password"
+    },
+    {
+        "username": "alex",
+        "password": "password"
+    },
+    {
+        "username": "ricky",
+        "password": "password"
     }
 ]
