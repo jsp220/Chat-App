@@ -1,12 +1,10 @@
 <div class="col">
-    {{!-- <form id="channel-form" class="card"> --}}
+    <h2>Start a chat with:</h2>
     {{#each users as |user|}}
         <div class="card">
             <button onclick="channelHandler({{username}})" id="{{username}}" class="card-body" type="button">{{username}}</button>
-            {{!-- <button id="{{username}}" class="card-body" type="submit">{{username}}</button> --}}
         </div>
     {{/each}}
-    {{!-- </form> --}}
 </div>
 
 <script src="/js/newchannel.js"></script>
