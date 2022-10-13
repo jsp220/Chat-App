@@ -45,32 +45,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-// Connect Sockect for message chat.
-// io.on('connection', (socket) => {
-//     // Every time localhost:PORT connection is made
-//     // show message on console.
-//     console.log(":electric_plug: User connected!");
-//     socket.on('chat message', msg => { io.emit('chat message', msg); });
-// });
-
 sequelize.sync({ force: false }).then(() => {
     // app.listen(PORT, () =>
     //     console.log(
-    //         `\nServer running on ${PORT}!`
-    //         )
-    // );
-    // Listen via socket IO connection for messages.
-    http.listen(PORT, () => {
-        console.log(`Socket.IO server running at http://localhost:${PORT}/`);
+        //         `\nServer running on ${PORT}!`
+        //         )
+        // );
+        // Listen via socket IO connection for messages.
+        http.listen(PORT, () => {
+            console.log(`Socket.IO server running at http://localhost:${PORT}/`);
+
+        });
+    })
+    
+    // Connect Socket for message chat.
+    io.on('connection', (socket) => {
+        // Every time localhost:PORT connection is made
+        // show message on console.
+        console.log(":electric_plug: User connected!");
+        socket.on('chat message', msg => { io.emit('chat message', msg); });
     });
-})
-
-// io.on('connection', (socket) => {
-//     socket.on('chat message', msg => {
-//         io.emit('chat message', msg);
-//     });
-// });
-
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/index.html');
-// });
