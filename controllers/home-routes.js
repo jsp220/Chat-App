@@ -35,7 +35,7 @@ router.get('/', withAuth, async (req,res) => {
 });
 
 router.get('/channel/:id', withAuth, async (req, res) => {
-    try {
+    try {      
         const userChannelData = await UserChannel.findAll({
             where: {
                 userId: req.session.user_id
@@ -44,19 +44,36 @@ router.get('/channel/:id', withAuth, async (req, res) => {
         // console.log(req.session.user_id)
         const userid = req.session.user_id;
         const userChannels = userChannelData.map((data) => data.get({ plain: true }));
+
+        // console.log(userChannels);
+
         let channel = [];
+        let channelBelong = false;
         for (let i=0; i < userChannels.length; i++) {
             const channelData = await Channel.findByPk(userChannels[i].channelId);
             channel.push(channelData.get({ plain: true }));
-            }
+            // console.log(userChannels[i].channelId);
+            // console.log(req.params.id);
+            if (userChannels[i].channelId == req.params.id) {
+                // console.log(userChannels[i].channelId);
+                // console.log(req.params.id);
+                channelBelong = true;
+                console.log(channelBelong);
+            } 
+        }
+
+        if (!channelBelong) {
+            res.status(200).redirect('/');
+        }
+
         const singleChannelData = await Channel.findByPk(req.params.id, {
-            include: [
-                {model: User, through: UserChannel, as: 'channel_user', attributes: {exclude: ['password']} },
-                // {model: User, through: UserChannel, as: 'channel_user'},
-                {model: Message, include: [
-                    {model: User, attributes: {exclude: ['password']} }
-                ]}
-            ]
+        include: [
+            {model: User, through: UserChannel, as: 'channel_user', attributes: {exclude: ['password']} },
+            // {model: User, through: UserChannel, as: 'channel_user'},
+            {model: Message, include: [
+                {model: User, attributes: {exclude: ['password']} }
+            ]}
+        ]
         });
         const singleChannel = singleChannelData.get({ plain: true });
         // console.log(singleChannel);

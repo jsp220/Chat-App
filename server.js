@@ -21,7 +21,7 @@ const hbs = exphbs.create({ helpers });
 const sess = {
     secret: 'Acid Underline Orange',
     cookie: {
-        maxAge: 1800000
+        maxAge: 18000000
     },
     resave: false,
     saveUninitialized: true,
@@ -63,5 +63,5 @@ sequelize.sync({ force: false }).then(() => {
         // Every time localhost:PORT connection is made
         // show message on console.
         console.log(":electric_plug: User connected!");
-        socket.on('chat message', msg => { io.emit('chat message', msg); });
+        socket.on('chat message', (msg, username) => { io.emit('chat message', msg, username); });
     });

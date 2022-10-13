@@ -11,9 +11,16 @@ router.post('/', async (req, res) => {
             userId: req.session.user_id
         });
 
-        console.log(newMessage);
+        const userData = await User.findByPk(req.session.user_id, {attributes: {exclude: ['password']}});
 
-        res.status(200).json(newMessage);
+        const user = userData.get({ plain: true });
+        
+
+        // console.log(newMessage);
+
+        console.log(user)
+
+        res.status(200).json({newMessage, user});
     } catch (err) {
         res.status(400).json(err);
     }
