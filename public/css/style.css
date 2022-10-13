@@ -7,3 +7,10 @@ html, body{
 .bodyDiv{
     height:100%
 }
+
+.right{
+    left: 60% !important;
+}
+.left{
+    left:10%;
+}
