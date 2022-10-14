@@ -1,26 +1,32 @@
 <div class="col d-flex flex-column align-items-end" id="channel-window">
 
-{{#each singleChannel.Messages}}
-  {{#ifEquals User.id ../userid }}
-        <div class="card text-bg-primary mb-3 right">
-            <div class="card-header">{{User.username}}</div>
-            <div class="card-body">
-                <h5 class="card-title">{{body}}</h5>
-            </div>
+    {{#each singleChannel.Messages}}
+    {{#ifEquals User.id ../userid }}
+    <div class="card text-bg-primary mb-3 right">
+        <div class="card-header">
+            <p><b>{{User.username}}</b></p>
+            <p class="timeStamp">{{format_date createdAt}}</p>
         </div>
-        <div class="empty"></div>
+        <div class="card-body">
+            <h5 class="card-title">{{body}}</h5>
+        </div>
+    </div>
+    <div class="empty"></div>
     {{else}}
-        <div class="card text-bg-success mb-3 left">
-            <div class="card-header">{{User.username}}</div>
-            <div class="card-body">
-                <h5 class="card-title">{{body}}</h5>
-            </div>
+    <div class="card text-bg-success mb-3 left">
+        <div class="card-header">
+            <p><b>{{User.username}}</b></p>
+            <p class="timeStamp">{{format_date createdAt}}</p>
         </div>
+        <div class="card-body">
+            <h5 class="card-title">{{body}}</h5>
+        </div>
+    </div>
     {{/ifEquals}}
-{{/each}}
-<form id="form" action="">
-    <input id="input" autofocus="true" autocomplete="off" /><button type="submit">Send</button>
-</form>
+    {{/each}}
+    <form id="form" action="">
+        <input id="input" autofocus="true" autocomplete="off" /><button type="submit">Send</button>
+    </form>
 </div>
 
 <script>
