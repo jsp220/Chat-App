@@ -7,14 +7,14 @@ const loginFormHandler = async function(event) {
   fetch("/api/user/login", {
     method: "post",
     body: JSON.stringify({
-      username: usernameEl.value,
+      username: usernameEl.value.toLowerCase(),
       password: passwordEl.value
     }),
     headers: { "Content-Type": "application/json" }
   })
   .then(response => {
     if (response.ok) {
-      localStorage.setItem('username', usernameEl.value);
+      localStorage.setItem('username', usernameEl.value.toLowerCase());
       return response.json();
     } else {
       console.log('abc')
