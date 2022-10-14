@@ -12,11 +12,19 @@ const loginFormHandler = async function(event) {
     }),
     headers: { "Content-Type": "application/json" }
   })
-    .then(function() {
+  .then(response => {
+    if (response.ok) {
       localStorage.setItem('username', usernameEl.value);
-      document.location.replace("/");
-    })
-    .catch(err => console.log(err));
+      return response.json();
+    } else {
+      console.log('abc')
+      alert('Invalid user name or password');
+    }
+  })
+  .then(data => {
+    document.location.replace("/");
+  })
+  .catch(err => alert('Invalid user name or password'));
 };
 
 document
