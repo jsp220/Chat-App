@@ -7,16 +7,24 @@ const loginFormHandler = async function(event) {
   fetch("/api/user/login", {
     method: "post",
     body: JSON.stringify({
-      username: usernameEl.value,
+      username: usernameEl.value.toLowerCase(),
       password: passwordEl.value
     }),
     headers: { "Content-Type": "application/json" }
   })
-    .then(function() {
-      localStorage.setItem('username', usernameEl.value);
-      document.location.replace("/");
-    })
-    .catch(err => console.log(err));
+  .then(response => {
+    if (response.ok) {
+      localStorage.setItem('username', usernameEl.value.toLowerCase());
+      return response.json();
+    } else {
+      console.log('abc')
+      alert('Invalid user name or password');
+    }
+  })
+  .then(data => {
+    document.location.replace("/");
+  })
+  .catch(err => alert('Invalid user name or password'));
 };
 
 document

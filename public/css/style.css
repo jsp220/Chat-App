@@ -46,14 +46,11 @@ body {
 
 .right{
     align-self: flex-end;
-    width: 40%;
-    max-width: 400px;
+    width: 222px;
 }
 .left{
     align-self: flex-start;
-    left: 0;
-    width: 40%;
-    max-width: 400px;
+    width: 222px;
 }
 
 #form { 
@@ -145,13 +142,6 @@ body {
 .card-title {
     color: black;
 }
-/* .nav-text{
-    color: white;
-}
-.card-body{
-    background-color: white !important;
-} */
-/* ********************* */
 
 .card{
     box-shadow: 5px 5px 5px grey;
@@ -171,28 +161,48 @@ body {
 .nav-item {
     width: 100px;
 }
-.timeStamp{
-    text-align: right;
+
+.user-name {
+    font-size: 1.1rem;
     margin-bottom: 0;
 }
-.dark-mode .btn-outline-secondary{
+
+.time-stamp {
+    text-align: right;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+}
+
+.dark-mode .btn-outline-secondary {
     background-color: #808080;
     color: white;
 }
-.dark-mode .btn-outline-secondary:hover{
+.dark-mode .btn-outline-secondary:hover {
     background-color: #3700B3;
 }
-.dark-mode .hover-card-text{
+.dark-mode .hover-card-text {
     color: black;
 }
-.dark-mode .hover-card-body:hover{
+.dark-mode .hover-card-body:hover {
     background-color: #03DAC6 !important;
 }
-.hover-card-body:hover{
+.hover-card-body:hover {
     background-color: #6c756d !important;
     color: white;
 }
-.corgiImg{
+.corgiImg {
 width: 15%;
 height: 15%;
+}
+
+/* Large smartphones - navbar changes color */
+@media screen and (min-width: 768px) {
+    .right{
+        width: 40%;
+        max-width: 400px;
+    }
+    .left{
+        width: 40%;
+        max-width: 400px;
+    }
 }

@@ -58,5 +58,5 @@ io.on('connection', (socket) => {
     // Every time localhost:PORT connection is made
     // show message on console.
     console.log(":electric_plug: User connected!");
-    socket.on('chat message', (msg, username) => { io.emit('chat message', msg, username); });
+    socket.on('chat message', (msg, info) => { io.emit('chat message', msg, info); });
 });

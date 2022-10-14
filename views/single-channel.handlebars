@@ -1,25 +1,25 @@
 <div class="col d-flex flex-column align-items-end" id="channel-window">
 
     {{#each singleChannel.Messages}}
-    {{#ifEquals User.id ../userid }}
+    {{#ifEquals User.id ../userId }}
     <div class="card text-bg-primary mb-3 right">
         <div class="card-header">
-            <p><b>{{User.username}}</b></p>
-            <p class="timeStamp">{{format_date createdAt}}</p>
+            <p class="fw-bolder user-name">{{User.username}}</p>
+            <p class="time-stamp">{{format_date createdAt}}</p>
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{body}}</h5>
+            <p class="card-title">{{body}}</p>
         </div>
     </div>
     <div class="empty"></div>
     {{else}}
     <div class="card text-bg-success mb-3 left">
         <div class="card-header">
-            <p><b>{{User.username}}</b></p>
-            <p class="timeStamp">{{format_date createdAt}}</p>
+            <p class="fw-bolder user-name">{{User.username}}</p>
+            <p class="time-stamp">{{format_date createdAt}}</p>
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{body}}</h5>
+            <p class="card-title">{{body}}</p>
         </div>
     </div>
     {{/ifEquals}}

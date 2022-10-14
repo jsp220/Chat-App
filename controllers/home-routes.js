@@ -10,15 +10,15 @@ router.get('/', withAuth, async (req,res) => {
             }
         })
 
-        const userid = req.session.user_id;
+        const userId = req.session.user_id;
 
         const userChannels = userChannelData.map((data) => data.get({ plain: true }));
 
         const userData = await User.findAll();
 
-        const users = userData.map((data) => data.get({ plain: true }));
+        const allUsers = userData.map((data) => data.get({ plain: true }));
         
-        // console.log(userChannels)
+        const users = allUsers.filter((user) => user.id != userId);
 
         let channel = [];
 
@@ -28,7 +28,7 @@ router.get('/', withAuth, async (req,res) => {
             // console.log(channel)
         }
 
-        res.render('home', {channel, users, userid, logged_in: req.session.logged_in})
+        res.render('home', {channel, users, userId, logged_in: req.session.logged_in})
     } catch (err) {
         res.status(500).json(err);
     }
@@ -42,7 +42,7 @@ router.get('/channel/:id', withAuth, async (req, res) => {
             }
         })
         // console.log(req.session.user_id)
-        const userid = req.session.user_id;
+        const userId = req.session.user_id;
         const userChannels = userChannelData.map((data) => data.get({ plain: true }));
 
         // console.log(userChannels);
@@ -86,7 +86,7 @@ router.get('/channel/:id', withAuth, async (req, res) => {
         
         const message = messageData.map((message) => message.get({ plain:true }));
         console.log(singleChannel);
-        res.render('single-channel', {  message, channel, singleChannel, logged_in: req.session.logged_in, userid });
+        res.render('single-channel', {  message, channel, singleChannel, logged_in: req.session.logged_in, userId });
     } catch (err) {
         res.status(500).json(err);
     }
