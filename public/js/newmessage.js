@@ -6,7 +6,9 @@ var mainBody = document.querySelector('.mainBody');
 var channelWindow = document.getElementById('channel-window')
 const URL = document.URL;
 
-rightCol.scrollTo(0, rightCol.scrollHeight);
+const init = () => {
+    rightCol.scrollTo(0, rightCol.scrollHeight);
+}
 
 form.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -41,35 +43,41 @@ form.addEventListener('submit', async function (e) {
 });
 
 socket.on('chat message', async function (msg, username) {
-    
     const sender = username.sender;
-    var div1 = document.createElement('div');
-    if (username.sender == localStorage.getItem('username')) {
-        div1.classList.add('card', 'text-bg-primary', 'mb-3', 'right');
-    } else {
-        div1.classList.add('card', 'text-bg-success', 'mb-3', 'left');
+    console.log(sender);
+    console.log(localStorage.getItem('user1'));
+    console.log(localStorage.getItem('user2'));
+    
+    
+    if (sender == localStorage.getItem('user1') || sender == localStorage.getItem('user2')) {
+        var div1 = document.createElement('div');
+        if (username.sender == localStorage.getItem('username')) {
+            div1.classList.add('card', 'text-bg-primary', 'mb-3', 'right');
+        } else {
+            div1.classList.add('card', 'text-bg-success', 'mb-3', 'left');
+        }
+        var div2 = document.createElement('div');
+        div2.classList.add('card-header');
+        div2.textContent = sender;
+        var div3 = document.createElement('div');
+        div3.classList.add('card-body');
+        var item = document.createElement('h5');
+        item.classList.add('card-title');
+        item.textContent = msg;
+    
+        div3.appendChild(item);
+        div1.appendChild(div2);
+        div1.appendChild(div3);
+        channelWindow.appendChild(div1);
     }
-    div1.setAttribute('style', 'max-width: 18rem');
-    var div2 = document.createElement('div');
-    div2.classList.add('card-header');
-    div2.textContent = sender;
-    var div3 = document.createElement('div');
-    div3.classList.add('card-body');
-    var item = document.createElement('h5');
-    item.classList.add('card-title');
-    item.textContent = msg;
-
-    div3.appendChild(item);
-    div1.appendChild(div2);
-    div1.appendChild(div3);
-    channelWindow.appendChild(div1);
 
     // // brian's
     // var item = document.createElement('li');
     // item.textContent = msg;
-    console.log(msg);
     // channelWindow.appendChild(item);
     // // end brian's
 
     rightCol.scrollTo(0, rightCol.scrollHeight);
 });
+
+init();

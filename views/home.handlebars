@@ -1,10 +1,13 @@
 <div class="col">
-    <h2>Start a chat with:</h2>
-    {{#each users as |user|}}
-        <div class="d-grid gap-2">
-            <button type="button" class="btn btn-outline-secondary userBtn" onclick="channelHandler({{username}})" id="{{username}}" class="card-body" type="button">{{username}}</button>
-        </div>
-    {{/each}}
+
+    <div class="col">
+        <h2>Start a chat with:</h2>
+        {{#each users as |user|}}
+            <div class="d-grid gap-2">
+                <button type="button" class="btn btn-outline-secondary userBtn" onclick="channelHandler({{username}})" id="{{username}}" class="card-body" type="button">{{username}}</button>
+            </div>
+        {{/each}}
+    </div>
 </div>
 
 <script src="/js/newchannel.js"></script>

@@ -75,6 +75,7 @@ router.get('/channel/:id', withAuth, async (req, res) => {
             ]}
         ]
         });
+
         const singleChannel = singleChannelData.get({ plain: true });
         // console.log(singleChannel);
         const messageData = await Message.findAll({
@@ -82,7 +83,9 @@ router.get('/channel/:id', withAuth, async (req, res) => {
                 channelId:req.params.id,
             }
         });
+        
         const message = messageData.map((message) => message.get({ plain:true }));
+        console.log(singleChannel);
         res.render('single-channel', {  message, channel, singleChannel, logged_in: req.session.logged_in, userid });
     } catch (err) {
         res.status(500).json(err);
