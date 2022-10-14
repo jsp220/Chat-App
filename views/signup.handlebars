@@ -1,18 +1,26 @@
     <div class="col-3 position-absolute top-30 start-50 translate-middle-x">
         <form id="signup-form"> 
             <div class="mb-3">
-                <label for="username-signup" class="form-label">Username</label>
-                <input id="username-signup" type="text" class="form-control" />
+                {{!-- Changed "Username" to "User Name" like login page. --}}
+                <label for="username-signup" class="form-label">User Name</label>
+                {{!-- Added autofocus --}}
+                <input id="username-signup" type="text" autofocus="true" class="form-control" />
             </div>
             <div class="mb-3">
                 <label class="form-label" for="password-signup">Password</label>
-                <input id="password-signup" type="password" class="form-control" />
+                {{!-- Added autofocus --}}
+                <input id="password-signup" type="password" autofocus="true" class="form-control" />
             </div>
             <button type="submit" class="btn btn-primary position-relative top-60 start-50 translate-middle-x">Sign Up</button>
         </form>
-        <div>
-            <p class="my-4">Already have an account? <span><a href="/login">Log in</a></span></p>
+
+        {{!-- Added separation line to login/Signup page. --}}
+        <div><hr>
+            <p>Already have an account? <span><a href="/login">Log in</a></span></p>
         </div>
+        {{!-- <div>
+            <p class="my-4">Already have an account? <span><a href="/login">Log in</a></span></p>
+        </div> --}}
     </div>
 
 <script src="/js/signup.js"></script>
