@@ -99,12 +99,34 @@ body {
 .nav-header{
     background-color: #6200EE;
 }
+
+/* Changed some settings. */
+#flexSwitchCheckChecked {
+    margin-right: 1px;
+}
+#login-form, #signup-form {
+    margin-top: 20px;
+}
 .nav-text{
+    color: white;
+    margin-right: 10px;
+}
+.card-body{
+    background-color: white !important;
+    border-bottom-right-radius: 0.45rem;
+    border-bottom-left-radius: 0.45rem;
+}
+.card-title {
+    color: black;
+}
+/* .nav-text{
     color: white;
 }
 .card-body{
     background-color: white !important;
-}
+} */
+/* ********************* */
+
 .card{
     box-shadow: 5px 5px 5px grey;
     margin: 10px;
