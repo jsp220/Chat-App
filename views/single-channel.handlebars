@@ -1,13 +1,16 @@
+<div class="col d-flex flex-column align-items-end" id="channel-window">
+
 {{#each singleChannel.Messages}}
   {{#ifEquals User.id ../userid }}
-        <div class="card text-bg-primary mb-3 right" style="max-width: 18rem;">
+        <div class="card text-bg-primary mb-3 right">
             <div class="card-header">{{User.username}}</div>
             <div class="card-body">
                 <h5 class="card-title">{{body}}</h5>
             </div>
         </div>
+        <div class="empty"></div>
     {{else}}
-        <div class="card text-bg-success mb-3 left" style="max-width: 18rem;">
+        <div class="card text-bg-success mb-3 left">
             <div class="card-header">{{User.username}}</div>
             <div class="card-body">
                 <h5 class="card-title">{{body}}</h5>
@@ -16,5 +19,14 @@
     {{/ifEquals}}
 {{/each}}
 <form id="form" action="">
-    <input id="input" autocomplete="off" /><button type="submit">Send</button>
+    <input id="input" autofocus="true" autocomplete="off" /><button type="submit">Send</button>
 </form>
+</div>
+
+<script>
+    localStorage.setItem('user1', '{{singleChannel.channel_user.[0].username}}')
+    localStorage.setItem('user2', '{{singleChannel.channel_user.[1].username}}')
+</script>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/newmessage.js"></script>
