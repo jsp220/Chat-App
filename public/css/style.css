@@ -1,6 +1,7 @@
 html, 
 body {
     height: 93%;
+    background-color: #e0e0e0;
 }
 
 .left-col,
@@ -63,4 +64,54 @@ body {
 .text-bg-success,
 .text-bg-primary {
     z-index: 1;
+}
+.dark-mode {
+    background-color: #121212;
+    color: #03DAC5;
+}
+.dark-mode .left {
+    background-color:#212121;
+}
+.dark-mode .right {
+    background-color:#212121;
+}
+.dark-mode .text-bg-primary {
+    background-color:#03DAC5 !important;
+}
+.dark-mode .text-bg-success{
+    background-color: #BB86FC !important;
+}
+.text-bg-success{
+    background-color: #6200EE !important;
+}
+.text-bg-primary{
+    background-color: #018786 !important;
+}
+.dark-mode header {
+    background-color:#212121 ;
+}
+.dark-mode #form {
+    color: #03DA5D;
+}
+.dark-mode .red-font {
+    color: #CF6679;
+}
+.nav-header{
+    background-color: #6200EE;
+}
+.nav-text{
+    color: white;
+}
+.card-body{
+    background-color: white !important;
+}
+.card{
+    box-shadow: 5px 5px 5px grey;
+    margin: 10px;
+    border-radius: 10px !important;
+}
+.userBtn{
+    margin: 10px !important;
+    box-shadow: 5px 5px 5px grey !important;
+    color: black;
 }
