@@ -15,10 +15,6 @@ body {
     margin-bottom: 100px;
 }
 
-.main-page {
-    padding: 
-}
-
 .form-check {
     margin-bottom: -1rem !important;
     padding-bottom: 0 !important;
@@ -50,14 +46,11 @@ body {
 
 .right{
     align-self: flex-end;
-    width: 40%;
-    max-width: 400px;
+    width: 222px;
 }
 .left{
     align-self: flex-start;
-    left: 0;
-    width: 40%;
-    max-width: 400px;
+    width: 222px;
 }
 
 #form { 
@@ -200,3 +193,23 @@ body {
 width: 15%;
 height: 15%;
 }
+
+/* Large smartphones - navbar changes color */
+@media screen and (min-width: 768px) {
+    .right{
+        width: 40%;
+        max-width: 400px;
+    }
+    .left{
+        width: 40%;
+        max-width: 400px;
+    }
+}
+  
+  /* Small smartphones - image placeholders change color */
+@media screen and (min-width: 992px) {
+    .sample-img {
+      background-color: #8ac4ff;
+    }
+}
+  
