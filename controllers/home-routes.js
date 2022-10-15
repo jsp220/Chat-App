@@ -5,6 +5,7 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, async (req,res) => {
     try {
         const userId = req.session.user_id;
+        const username = req.session.username;
         
         const userChannelData = await UserChannel.findAll({ where: {userId} })
         const userChannels = userChannelData.map((data) => data.get({ plain: true }));
@@ -55,7 +56,7 @@ router.get('/', withAuth, async (req,res) => {
         }
         console.log(channel);
 
-        res.render('home', {channel, users, userId, logged_in: req.session.logged_in})
+        res.render('home', {channel, users, userId, username, logged_in: req.session.logged_in})
     } catch (err) {
         res.status(500).json(err);
     }

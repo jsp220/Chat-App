@@ -17,6 +17,7 @@ router.post('/', async (req, res) => {
 
         const channel = channelData.get({ plain: true });
 
+        const channelId = channel.id;
         let sender;
         const senderId = req.session.user_id;
         let receiver;
@@ -31,7 +32,7 @@ router.post('/', async (req, res) => {
             }
         }
 
-        res.status(200).json({newMessage, sender, receiver, senderId, receiverId});
+        res.status(200).json({newMessage, sender, receiver, senderId, channelId, receiverId});
     } catch (err) {
         res.status(400).json(err);
     }

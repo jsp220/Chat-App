@@ -66,7 +66,7 @@ socket.on('chat message', async function (msg, info) {
 
             var aEl = document.createElement('a');
             aEl.classList.add('btn', 'card-body', 'p-1', 'hover-card-body', `chat-${sender}`);
-            aEl.setAttribute('href', `/channel/${info.senderId}`);
+            aEl.setAttribute('href', `/channel/${info.channelId}`);
 
             var pEl = document.createElement('p');
             pEl.classList.add('card-text', 'hover-card-text');

@@ -28,7 +28,7 @@ form.addEventListener('submit', async function (e) {
             console.log(data);
             // localStorage.setItem('sender', data.user.username);
 
-            socket.emit('chat message', input.value, {sender: data.sender, receiver: data.receiver, senderId: data.senderId, receiverId: data.receiverId, timestamp: data.newMessage.createdAt});
+            socket.emit('chat message', input.value, {sender: data.sender, receiver: data.receiver, senderId: data.senderId, receiverId: data.receiverId, channelId: data.channelId, timestamp: data.newMessage.createdAt});
             // document.location.replace(`/channel/${data.id}`);
             // const splitUrl = response.url.split("/") // [http:, ]
             // const url = splitUrl[splitUrl.length-1];
