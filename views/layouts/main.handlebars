@@ -20,16 +20,23 @@
 <body class="abc" id="theme">
   <nav class="navbar navbar-expand-lg nav-header">
     <div class="container-fluid">
-      <a class="navbar-brand nav-text mx-2" href="/"><span><img class="corgiImg" src="/image/corgiMessenger.png"
-            alt="Corgi Messenger"></span>Corgis Messenger</a>
+      <a class="navbar-brand nav-text mx-2" href="/">
+        <span><img class="corgiImg" src="/image/corgiMessenger.png" alt="Corgi Messenger"></span>Corgis Messenger
+      </a>
+      {{#if logged_in}}
+      {{/if}}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
-
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
+        {{#if logged_in}}
+        <li class="nav-item ms-4">
+          <a class="nav-text nav-link logged-in">Logged in as {{channel.[0].user1}}</a>
+        </li>
+        {{/if}}
         <li class="nav-item ms-4">
           <a class="nav-link nav-text" aria-current="page" href="/">Home</a>
         </li>

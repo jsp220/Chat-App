@@ -2,12 +2,9 @@ const loginFormHandler = async function (event) {
     event.preventDefault();
 
     try {
-
         const username = document.querySelector("#username-login").value.trim();
         const password = document.querySelector("#password-login").value.trim();
         
-        console.log(password);
-
         if (username && password) {
             const response = await fetch("/api/user/login", {
                 method: "POST",
@@ -20,7 +17,6 @@ const loginFormHandler = async function (event) {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log(data);
                 localStorage.setItem('username', username.toLowerCase());
                 document.location.replace("/");
             } else {
