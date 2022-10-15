@@ -36,6 +36,7 @@ router.get('/', withAuth, async (req,res) => {
 
 router.get('/channel/:id', withAuth, async (req, res) => {
     try {      
+        // find all rows in UserChannel where the current user appears (to find all channels they belong to)
         const userChannelData = await UserChannel.findAll({
             where: {
                 userId: req.session.user_id
@@ -45,10 +46,11 @@ router.get('/channel/:id', withAuth, async (req, res) => {
         const userId = req.session.user_id;
         const userChannels = userChannelData.map((data) => data.get({ plain: true }));
 
-        // console.log(userChannels);
+        
 
         let channel = [];
         let channelBelong = false;
+        // create an array called channel 
         for (let i=0; i < userChannels.length; i++) {
             const channelData = await Channel.findByPk(userChannels[i].channelId);
             channel.push(channelData.get({ plain: true }));
@@ -62,33 +64,34 @@ router.get('/channel/:id', withAuth, async (req, res) => {
             } 
         }
 
-        if (!channelBelong) {
-            res.status(200).redirect('/');
+        if (channelBelong) {
+
+            const singleChannelData = await Channel.findByPk(req.params.id, {
+                include: [
+                    {model: User, through: UserChannel, as: 'channel_user', attributes: {exclude: ['password']} },
+                    // {model: User, through: UserChannel, as: 'channel_user'},
+                    {model: Message, include: [
+                        {model: User, attributes: {exclude: ['password']} }
+                    ]}
+                ]
+            });
+            
+            const singleChannel = singleChannelData.get({ plain: true });
+            // console.log(singleChannel);
+            const messageData = await Message.findAll({
+                where:{
+                    channelId:req.params.id,
+                }
+            });
+            
+            const message = messageData.map((message) => message.get({ plain:true }));
+            console.log(singleChannel);
+            res.render('single-channel', {  message, channel, singleChannel, logged_in: req.session.logged_in, userId });
+        } else {
+            res.status(400).redirect('/')
         }
-
-        const singleChannelData = await Channel.findByPk(req.params.id, {
-        include: [
-            {model: User, through: UserChannel, as: 'channel_user', attributes: {exclude: ['password']} },
-            // {model: User, through: UserChannel, as: 'channel_user'},
-            {model: Message, include: [
-                {model: User, attributes: {exclude: ['password']} }
-            ]}
-        ]
-        });
-
-        const singleChannel = singleChannelData.get({ plain: true });
-        // console.log(singleChannel);
-        const messageData = await Message.findAll({
-            where:{
-                channelId:req.params.id,
-            }
-        });
-        
-        const message = messageData.map((message) => message.get({ plain:true }));
-        console.log(singleChannel);
-        res.render('single-channel', {  message, channel, singleChannel, logged_in: req.session.logged_in, userId });
     } catch (err) {
-        res.status(500).json(err);
+        return;
     }
 });
 
@@ -112,6 +115,6 @@ if (req.session.logged_in) {
 res.render('signup', {logged_in: req.session.logged_in});
 });
 
-
+router.get('*', (req, res) => res.redirect('/'));
 
 module.exports = router;
