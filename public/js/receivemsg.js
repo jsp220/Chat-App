@@ -51,8 +51,33 @@ socket.on('chat message', async function (msg, info) {
         channelWindow.appendChild(div1);
     } else if (receiver == localStorage.getItem('username')) {
         console.log(sender);
-        chatEl = document.querySelector(`.chat-${sender}`).parentElement;
-        chatEl.setAttribute('style', 'box-shadow: 5px 5px 5px red;');
+        if (document.querySelector(`.chat-${sender}`) != undefined) {
+            var chatEl = document.querySelector(`.chat-${sender}`).parentElement;
+            chatEl.setAttribute('style', 'box-shadow: 5px 5px 5px red;');
+        } else {
+            var leftColEl = document.querySelector('.left-col');
+            
+            var div1 = document.createElement('div');
+            div1.classList.add('col');
+
+            var div2 = document.createElement('div');
+            div2.classList.add('card');
+            div2.setAttribute('style', 'box-shadow: 5px 5px 5px red;')
+
+            var aEl = document.createElement('a');
+            aEl.classList.add('btn', 'card-body', 'p-1', 'hover-card-body', `chat-${sender}`);
+            aEl.setAttribute('href', `/channel/${info.senderId}`);
+
+            var pEl = document.createElement('p');
+            pEl.classList.add('card-text', 'hover-card-text');
+            pEl.textContent = `Chat with ${sender}`;
+
+            aEl.appendChild(pEl);
+            div2.appendChild(aEl);
+            div1.appendChild(div2);
+            leftColEl.appendChild(div1);
+        }
+        
     }
 
     rightCol.scrollTo(0, rightCol.scrollHeight);

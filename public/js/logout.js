@@ -5,6 +5,9 @@ const logout = async () => {
   });
 
   if (response.ok) {
+    localStorage.removeItem('username');
+    localStorage.removeItem('user1');
+    localStorage.removeItem('user2');
     document.location.replace('/login');
   } else {
     alert(response.statusText);
