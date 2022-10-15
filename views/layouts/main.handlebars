@@ -59,12 +59,14 @@
     {{!-- <div class="row bodyDiv"> --}}
       <div class="bodyDiv">
         <div class="overflow-auto left-col">
-
+          <div class="col">
+            <h3 class="p-2 fw-bolder">My Chats</h3>
+          </div>
           {{#each channel}}
           <div class="col">
             <div class="card">
-              <a class="btn card-body hover-card-body" href="/channel/{{id}}">
-                <p class="card-text hover-card-text">{{name}}</p>
+              <a class="btn card-body p-1 hover-card-body chat-{{user2}}" href="/channel/{{id}}">
+                <p class="card-text hover-card-text">Chat with {{user2}}</p>
               </a>
             </div>
           </div>

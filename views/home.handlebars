@@ -1,5 +1,5 @@
 <div class="col p-2">
-    <h2>Start a chat with:</h2>
+    <h3 class="fw-bolder">Start a chat with:</h3>
     <div class="row">
         {{#each users as |user|}}
         <div class="d-grid col-6 col-lg-4">
@@ -9,5 +9,7 @@
     </div>
 </div>
 
+<script src="/js/index.js"></script>
 <script src="/js/newchannel.js"></script>
-
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/receivemsg.js"></script>
