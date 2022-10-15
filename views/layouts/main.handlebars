@@ -1,88 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dark_mode.css">
 </head>
 
-<body class="abc">
+<body class="abc" id="theme">
   <nav class="navbar navbar-expand-lg nav-header">
     <div class="container-fluid">
-      <a class="navbar-brand nav-text mx-2" href="/"><span><img class="corgiImg" src="/image/corgiMessenger.png" alt="Corgi Messenger"></span>Corgis Messenger</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand nav-text mx-2" href="/"><span><img class="corgiImg" src="/image/corgiMessenger.png"
+            alt="Corgi Messenger"></span>Corgis Messenger</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
 
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item ms-4">
-            <a class="nav-link nav-text" aria-current="page" href="/">Home</a>
-          </li>
-          {{#if logged_in}}
-          <li class="nav-item ms-4">
-            <a class="nav-link nav-text" id="logout" href="">Log Out</a>
-          </li>
-          {{else}}
-          <li class="nav-item ms-4">
-            <a class="nav-link nav-text" href="/">Log In</a>
-          </li>
-          {{/if}}
-          <div class="form-check form-switch ms-4 me-2">
-            <label class="dark-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"  onclick="DarkMode()">
-              <span class="form-check-label" for="flexSwitchCheckChecked"></span><p class=" nav-text">Dark</p>
-            </label>
-          </div>
-          <script>
-            function DarkMode() {
-              var toggle = document.body;
-              toggle.classList.toggle("dark-mode");
-            }
-          </script>
-        </ul>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item ms-4">
+          <a class="nav-link nav-text" aria-current="page" href="/">Home</a>
+        </li>
+        {{#if logged_in}}
+        <li class="nav-item ms-4">
+          <a class="nav-link nav-text" id="logout" href="">Log Out</a>
+        </li>
+        {{else}}
+        <li class="nav-item ms-4">
+          <a class="nav-link nav-text" href="/">Log In</a>
+        </li>
+        {{/if}}
+        <div class="form-check form-switch ms-4 me-2">
+          <label class="dark-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="toggle-btn" class="dark-mode-toggle">
+            <span class="form-check-label" for="flexSwitchCheckChecked"></span>
+            <p class=" nav-text">Dark</p>
+          </label>
+        </div>
+      </ul>
+    </div>
   </nav>
 
-{{!-- Main body start here --}}
+  {{!-- Main body start here --}}
   <div class="mainBody">
-  {{!-- Channel start here --}}
+    {{!-- Channel start here --}}
     {{!-- <div class="row bodyDiv"> --}}
-    <div class="bodyDiv">
-      <div class="overflow-auto left-col">
-        
-        {{#each channel}}
-        <div class="col">
-          <div class="card">
-            <a class="btn card-body hover-card-body" href="/channel/{{id}}">
-              <p class="card-text hover-card-text">{{name}}</p>
-            </a>
+      <div class="bodyDiv">
+        <div class="overflow-auto left-col">
+
+          {{#each channel}}
+          <div class="col">
+            <div class="card">
+              <a class="btn card-body hover-card-body" href="/channel/{{id}}">
+                <p class="card-text hover-card-text">{{name}}</p>
+              </a>
+            </div>
           </div>
+          {{/each}}
         </div>
-        {{/each}}
-      </div>  
         {{!-- Channel end here --}}
         {{!-- *************************************************************************************** --}}
         {{!-- Message start here --}}
-      <div class="overflow-auto right-col">
-        {{{body}}}
+        <div class="overflow-auto right-col">
+          {{{body}}}
+        </div>
       </div>
+      {{!-- Message end here --}}
+      {{!-- *************************************************************************************** --}}
     </div>
-  {{!-- Message end here --}}
-  {{!-- *************************************************************************************** --}}
-  </div>
 
-{{#if logged_in}}
-  
-  <script src="/js/logout.js"></script>
-{{/if}}
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
+    <script src="/js/dark-mode.js"></script>
 </body>
 
 </html>
