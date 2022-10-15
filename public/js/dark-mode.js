@@ -2,6 +2,10 @@ const toggleBtn = document.getElementById("toggle-btn");
 const theme = document.getElementById("theme");
 let darkMode = localStorage.getItem("dark-mode");
 
+if (localStorage.getItem('dark-mode') == 'enabled') {
+    toggleBtn.setAttribute('checked', 'true');
+}
+
 const enableDarkMode = () => {
     theme.classList.add("dark-mode-theme");
     toggleBtn.classList.remove("dark-mode-toggle");
@@ -20,7 +24,7 @@ if (darkMode === "enabled") {
 
 toggleBtn.addEventListener("click", (e) => {
     darkMode = localStorage.getItem("dark-mode"); // update darkMode when clicked
-    if (darkMode === "disabled") {
+    if (darkMode !== "enabled") {
         enableDarkMode();
     } else {
         disableDarkMode();

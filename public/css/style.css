@@ -75,19 +75,33 @@ body {
     margin: 0.25rem; 
 }
 
-#input:focus { outline: none; }
-#form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+#input:focus { 
+    outline: none; 
+}
+
+#form > button { 
+    background: #333; 
+    border: none; 
+    padding: 0 1rem; 
+    margin: 0.25rem; 
+    border-radius: 3px; 
+    outline: none; 
+    color: #fff; 
+}
 
 .text-bg-success,
 .text-bg-primary {
     z-index: 1;
 }
+
 .text-bg-success{
     background-color: #6200EE !important;
 }
+
 .text-bg-primary{
     background-color: #018786 !important;
 }
+
 .nav-header{
     background-color: #6200EE;
 }
@@ -96,15 +110,17 @@ body {
 #flexSwitchCheckChecked {
     margin-right: 1px;
 }
+
 #login-form, #signup-form {
     margin-top: 20px;
 }
-.nav-text{
+
+.nav-text {
     color: white;
     margin-right: 10px;
 }
 
-.card-body{
+.card-body {
     background-color: white !important;
     border-bottom-right-radius: 0.45rem;
     border-bottom-left-radius: 0.45rem;
@@ -113,12 +129,12 @@ body {
     color: black;
 }
 
-.card{
+.card {
     box-shadow: 5px 5px 5px grey;
     margin: 10px;
     border-radius: 10px !important;
 }
-.userBtn{
+.userBtn {
     margin: 10px !important;
     box-shadow: 5px 5px 5px grey !important;
     color: black;
@@ -142,10 +158,12 @@ body {
     margin-bottom: 0;
     font-size: 0.8rem;
 }
+
 .hover-card-body:hover {
     background-color: #6c756d !important;
     color: white;
 }
+
 .corgiImg {
 width: 15%;
 height: 15%;

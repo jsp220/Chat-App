@@ -28,7 +28,7 @@ form.addEventListener('submit', async function (e) {
             console.log(data);
             // localStorage.setItem('sender', data.user.username);
 
-            socket.emit('chat message', input.value, {sender: data.user.username, timestamp: data.newMessage.createdAt});
+            socket.emit('chat message', input.value, {sender: data.sender, receiver: data.receiver, timestamp: data.newMessage.createdAt});
             // document.location.replace(`/channel/${data.id}`);
             // const splitUrl = response.url.split("/") // [http:, ]
             // const url = splitUrl[splitUrl.length-1];
@@ -44,13 +44,17 @@ form.addEventListener('submit', async function (e) {
 
 socket.on('chat message', async function (msg, info) {
     const sender = info.sender;
+    const receiver = info.receiver;
     const utcDate = new Date(`${info.timestamp}`)
     const timestamp = `${utcDate.toLocaleDateString()} ${utcDate.toLocaleTimeString('en-US')}`;
     // console.log(timestamp)
     
-    if (sender == localStorage.getItem('user1') || sender == localStorage.getItem('user2')) {
+    if (
+        (sender == localStorage.getItem('user1') && receiver == localStorage.getItem('user2')) ||
+        (sender == localStorage.getItem('user2') && receiver == localStorage.getItem('user1'))) {
+
         var div1 = document.createElement('div');
-        if (info.sender == localStorage.getItem('username')) {
+        if (sender == localStorage.getItem('username')) {
             div1.classList.add('card', 'text-bg-primary', 'mb-3', 'right');
         } else {
             div1.classList.add('card', 'text-bg-success', 'mb-3', 'left');
