@@ -20,16 +20,23 @@
 <body class="abc" id="theme">
   <nav class="navbar navbar-expand-lg nav-header">
     <div class="container-fluid">
-      <a class="navbar-brand nav-text mx-2" href="/"><span><img class="corgiImg" src="/image/corgiMessenger.png"
-            alt="Corgi Messenger"></span>Corgis Messenger</a>
+      <a class="navbar-brand nav-text mx-2" href="/">
+        <span><img class="corgiImg" src="/image/corgiMessenger.png" alt="Corgi Messenger"></span>Corgis Messenger
+      </a>
+      {{#if logged_in}}
+      {{/if}}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
-
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
+        {{#if logged_in}}
+        <li class="nav-item ms-4">
+          <a class="nav-text nav-link logged-in">Logged in as {{username}}</a>
+        </li>
+        {{/if}}
         <li class="nav-item ms-4">
           <a class="nav-link nav-text" aria-current="page" href="/">Home</a>
         </li>
@@ -59,26 +66,23 @@
     {{!-- <div class="row bodyDiv"> --}}
       <div class="bodyDiv">
         <div class="overflow-auto left-col">
-
+          <div class="col">
+            <h3 class="p-2 fw-bolder">My Chats</h3>
+          </div>
           {{#each channel}}
           <div class="col">
             <div class="card">
-              <a class="btn card-body hover-card-body" href="/channel/{{id}}">
-                <p class="card-text hover-card-text">{{name}}</p>
+              <a class="btn card-body p-1 hover-card-body chat-{{user2}}" href="/channel/{{id}}">
+                <p class="card-text hover-card-text">Chat with {{user2}}</p>
               </a>
             </div>
           </div>
           {{/each}}
         </div>
-        {{!-- Channel end here --}}
-        {{!-- *************************************************************************************** --}}
-        {{!-- Message start here --}}
         <div class="overflow-auto right-col">
           {{{body}}}
         </div>
       </div>
-      {{!-- Message end here --}}
-      {{!-- *************************************************************************************** --}}
     </div>
 
     {{#if logged_in}}

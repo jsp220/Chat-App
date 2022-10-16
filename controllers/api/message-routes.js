@@ -1,26 +1,38 @@
 const router = require('express').Router();
-const { User, Message } = require('../../models');
+const { User, Channel, UserChannel, Message } = require('../../models');
 
 router.post('/', async (req, res) => {
     
     try {
-        console.log(req.body);
-        
         const newMessage = await Message.create( {
             ...req.body,
             userId: req.session.user_id
         });
 
-        const userData = await User.findByPk(req.session.user_id, {attributes: {exclude: ['password']}});
+        const channelData = await Channel.findByPk(req.body.channelId, {
+            include: [
+                {model: User, through: UserChannel, as: 'channel_user', attributes: {exclude: ['password']} }
+            ]
+        });
 
-        const user = userData.get({ plain: true });
-        
+        const channel = channelData.get({ plain: true });
 
-        // console.log(newMessage);
+        const channelId = channel.id;
+        let sender;
+        const senderId = req.session.user_id;
+        let receiver;
+        let receiverId;
 
-        console.log(user)
+        for (let i in channel.channel_user) {
+            if (channel.channel_user[i].id == req.session.user_id) {
+                sender = channel.channel_user[i].username;
+            } else {
+                receiver = channel.channel_user[i].username;
+                receiverId = channel.channel_user[i].id;
+            }
+        }
 
-        res.status(200).json({newMessage, user});
+        res.status(200).json({newMessage, sender, receiver, senderId, channelId, receiverId});
     } catch (err) {
         res.status(400).json(err);
     }

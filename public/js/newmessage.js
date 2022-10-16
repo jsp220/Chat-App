@@ -28,7 +28,7 @@ form.addEventListener('submit', async function (e) {
             console.log(data);
             // localStorage.setItem('sender', data.user.username);
 
-            socket.emit('chat message', input.value, {sender: data.user.username, timestamp: data.newMessage.createdAt});
+            socket.emit('chat message', input.value, {sender: data.sender, receiver: data.receiver, senderId: data.senderId, receiverId: data.receiverId, channelId: data.channelId, timestamp: data.newMessage.createdAt});
             // document.location.replace(`/channel/${data.id}`);
             // const splitUrl = response.url.split("/") // [http:, ]
             // const url = splitUrl[splitUrl.length-1];
@@ -40,57 +40,6 @@ form.addEventListener('submit', async function (e) {
         
         input.value = '';
     }
-});
-
-socket.on('chat message', async function (msg, info) {
-    const sender = info.sender;
-    const utcDate = new Date(`${info.timestamp}`)
-    const timestamp = `${utcDate.toLocaleDateString()} ${utcDate.toLocaleTimeString('en-US')}`;
-    // console.log(timestamp)
-    
-    if (sender == localStorage.getItem('user1') || sender == localStorage.getItem('user2')) {
-        var div1 = document.createElement('div');
-        if (info.sender == localStorage.getItem('username')) {
-            div1.classList.add('card', 'text-bg-primary', 'mb-3', 'right');
-        } else {
-            div1.classList.add('card', 'text-bg-success', 'mb-3', 'left');
-        }
-        
-        var div2 = document.createElement('div');
-        div2.classList.add('card-header');
-        
-        var p1 = document.createElement('p');
-        p1.classList.add('fw-bolder', 'user-name');
-        p1.textContent = sender;
-        
-        var p2 = document.createElement('p');
-        p2.classList.add('time-stamp');
-        p2.textContent = timestamp;
-
-        var div3 = document.createElement('div');
-        div3.classList.add('card-body');
-        var item = document.createElement('p');
-        item.classList.add('card-title');
-        item.textContent = msg;
-    
-        div2.appendChild(p1);
-        div2.appendChild(p2);
-
-        div3.appendChild(item);
-
-        div1.appendChild(div2);
-        div1.appendChild(div3);
-
-        channelWindow.appendChild(div1);
-    }
-
-    // // brian's
-    // var item = document.createElement('li');
-    // item.textContent = msg;
-    // channelWindow.appendChild(item);
-    // // end brian's
-
-    rightCol.scrollTo(0, rightCol.scrollHeight);
 });
 
 init();
