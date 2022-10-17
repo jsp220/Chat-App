@@ -8,11 +8,6 @@ var channelWindow = document.getElementById('channel-window')
 const URL = document.URL;
 
 const init = () => {
-    const chats = leftCol.children;
-    // console.log(chats);
-    for (let i = 1; i < chats.length; i++) {
-        chats[i].setAttribute('style', `order: ${i}`);
-    }
     rightCol.scrollTo(0, rightCol.scrollHeight);
 }
 

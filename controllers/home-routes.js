@@ -141,7 +141,7 @@ router.get('/channel/:id', withAuth, async (req, res) => {
             
             const message = messageData.map((message) => message.get({ plain:true }));
             console.log(singleChannel);
-            res.render('single-channel', {  message, channel, singleChannel, logged_in: req.session.logged_in, userId });
+            res.render('single-channel', {  message, username: req.session.username, channel, singleChannel, logged_in: req.session.logged_in, userId });
         } else {
             res.status(400).redirect('/')
         }
