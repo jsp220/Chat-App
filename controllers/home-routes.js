@@ -31,6 +31,8 @@ router.get('/', withAuth, async (req,res) => {
             // console.log(channel)
         }
 
+        channels.sort((a,b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+
         console.log(channels);
 
         let channel = [];
@@ -54,7 +56,7 @@ router.get('/', withAuth, async (req,res) => {
             // }
             channel.push({id, name, user1, user2});
         }
-        console.log(channel);
+        // console.log(channel);
 
         res.render('home', {channel, users, userId, username, logged_in: req.session.logged_in})
     } catch (err) {
@@ -91,6 +93,8 @@ router.get('/channel/:id', withAuth, async (req, res) => {
                 console.log(channelBelong);
             } 
         }
+
+        channels.sort((a,b) => b.updatedAt.getTime() - a.updatedAt.getTime());
 
         if (channelBelong) {
 

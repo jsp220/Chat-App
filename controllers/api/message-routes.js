@@ -17,6 +17,16 @@ router.post('/', async (req, res) => {
 
         const channel = channelData.get({ plain: true });
 
+        const updateChannel = await Channel.update( 
+            {
+                name: channel.name
+            },
+            {
+                where: {
+                    id: channel.id,
+                }
+            });
+    
         const channelId = channel.id;
         let sender;
         const senderId = req.session.user_id;
