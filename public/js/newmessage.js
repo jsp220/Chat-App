@@ -1,12 +1,18 @@
 var socket = io();
 var form = document.getElementById('form');
 var input = document.getElementById('input');
+var leftCol = document.querySelector('.left-col');
 var rightCol = document.querySelector('.right-col');
 var mainBody = document.querySelector('.mainBody');
 var channelWindow = document.getElementById('channel-window')
 const URL = document.URL;
 
 const init = () => {
+    const chats = leftCol.children;
+    // console.log(chats);
+    for (let i = 1; i < chats.length; i++) {
+        chats[i].setAttribute('style', `order: ${i}`);
+    }
     rightCol.scrollTo(0, rightCol.scrollHeight);
 }
 
@@ -25,7 +31,7 @@ form.addEventListener('submit', async function (e) {
         if (response.ok) {
             const data = await response.json();
 
-            console.log(data);
+            // console.log(data);
             // localStorage.setItem('sender', data.user.username);
 
             socket.emit('chat message', input.value, {sender: data.sender, receiver: data.receiver, senderId: data.senderId, receiverId: data.receiverId, channelId: data.channelId, timestamp: data.newMessage.createdAt});
