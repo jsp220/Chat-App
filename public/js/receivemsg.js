@@ -46,7 +46,8 @@ socket.on('chat message', async function (msg, info) {
                 var leftColEl = document.querySelector('.left-col');
                 var div1 = document.createElement('div', `chat-${sender}`);
                 div1.classList.add('col');
-                div1.setAttribute('style', `order: ${eval(topChatOrder-1)}`);
+                div1.setAttribute('style', `order: ${order}`);
+                order--;
                 
                 var div2 = document.createElement('div');
                 div2.classList.add('card');
