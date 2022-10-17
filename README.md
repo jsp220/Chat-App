@@ -34,7 +34,14 @@ N/A
 
 ## License
 MIT<br>
-Copyright(c) 2022 Corgi Messenger
+Corgis brand/logo used with permission from Code with Corgis
+
+## Team Members
+* Alexander Carr
+* Qi Chen
+* Ryan Dao
+* Joon Park
+* Brain Zoulko 
 
 ## User Story
 * As a user who want to chat with other user
