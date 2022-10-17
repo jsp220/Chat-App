@@ -33,7 +33,7 @@ router.get('/', withAuth, async (req,res) => {
 
         channels.sort((a,b) => b.updatedAt.getTime() - a.updatedAt.getTime());
 
-        console.log(channels);
+        // console.log(channels);
 
         let channel = [];
 

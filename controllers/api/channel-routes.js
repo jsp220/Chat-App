@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
         for (let i in currentUser.user_channel) {
             const channel = currentUser.user_channel[i];
             
-            console.log(channel);
+            // console.log(channel);
             
             for (let i in channel.channel_user) {
                 const userInChannel = channel.channel_user[i];
