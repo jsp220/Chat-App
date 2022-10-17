@@ -83,4 +83,4 @@ Corgis brand/logo used with permission from Code with Corgis
 
 Application URL: https://corgi-messenger.herokuapp.com/<br>
 GitHub URL: https://github.com/ricky8221/chat-project<br>
-![](public/images/screenshot.jpg)
+![](public/image/screenshot.jpg)
