@@ -19,7 +19,7 @@ const io = require('socket.io')(http);
 const hbs = exphbs.create({ helpers });
 
 const sess = {
-    secret: 'Acid Underline Orange',
+    secret: process.env.SECRET,
     cookie: {
         maxAge: 18000000
     },
